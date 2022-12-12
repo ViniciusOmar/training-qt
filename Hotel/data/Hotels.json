@@ -1,0 +1,31 @@
+{
+  "1": {
+    "m_uuid": 1,
+    "m_name": "HoHotel",
+    "m_rooms": {
+      "1": {
+        "m_uuid": 1,
+        "m_numberIdentifier": 100,
+        "m_allocated": true,
+        "m_allocationType": "DAY",
+        "m_numberOfOccupiers": 4,
+        "m_dayPrice": 200,
+        "m_monthPrice": 4000,
+        "m_type": "QUAD",
+        "m_class": "STANDARD"
+      },
+      "2": {
+        "m_uuid": 2,
+        "m_numberIdentifier": 101,
+        "m_allocated": false,
+        "m_allocationType": "NONE",
+        "m_numberOfOccupiers": null,
+        "m_dayPrice": 200,
+        "m_monthPrice": 4000,
+        "m_type": "QUAD",
+        "m_class": "STANDARD"
+      }
+    },
+    "income": null
+  }
+}

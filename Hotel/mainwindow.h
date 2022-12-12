@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "hotel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +18,11 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    QList<Hotel*> m_hotels;
+    Hotel *m_selectedHotel;
+
+protected:
+    /*void paintEvent(QPaintEvent *e);*/
 };
 #endif // MAINWINDOW_H
