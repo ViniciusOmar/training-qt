@@ -115,15 +115,19 @@ void Room::setFloor(int newFloor)
     floor = newFloor;
 }
 
-void Room::paintEvent(QPaintEvent *event)
-{
+// void Room::paintEvent(QPaintEvent *event)
+// {
 
-    QPolygon roomDrawing;
-    roomDrawing << QPoint(0, 0);
-    roomDrawing << QPoint(40, 0);
-    roomDrawing << QPoint(40, 100);
-    roomDrawing << QPoint(0, 100);
+    // QPolygon roomDrawing;
+    // roomDrawing << QPoint(0, 0);
+    // roomDrawing << QPoint(40, 0);
+    // roomDrawing << QPoint(40, 60);
+    // roomDrawing << QPoint(0, 60);
 
-    QPainter painter(this);
-    painter.drawPolygon(roomDrawing);
-}
+    // QPen pen;
+    // pen.setColor(Qt::blue);
+
+    // QPainter painter(this);
+    // painter.setPen(pen);
+    // painter.drawPolygon(roomDrawing);
+// }

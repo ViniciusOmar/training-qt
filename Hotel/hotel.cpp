@@ -67,22 +67,22 @@ int Hotel::numberOfRoomsOnFloor(int floor) const
     return roomsOnFloor;
 }
 
-void Hotel::paintEvent(QPaintEvent *e)
-{
-    QPainter painter(this);
-    int x = 0;
-    int y = 0;
-    for(int i = 0; i < m_numberOfFloors; ++i)
-    {
-        QPolygon floor;
-        floor << QPoint(x, y);
-        floor << QPoint(x + 400, y);
-        floor << QPoint(x + 400, y + 100);
-        floor << QPoint(x, y + 100);
+// void Hotel::paintEvent(QPaintEvent *e)
+// {
+    // QPainter painter(this);
+    // int x = 0;
+    // int y = 0;
+    // for(int i = 0; i < m_numberOfFloors; ++i)
+    // {
+        // QPolygon floor;
+        // floor << QPoint(x, y);
+        // floor << QPoint(x + 400, y);
+        // floor << QPoint(x + 400, y + 100);
+        // floor << QPoint(x, y + 100);
 
-        painter.drawPolygon(floor);
+        // painter.drawPolygon(floor);
 
-        x += 400;
-        y += 100;
-    }
-}
+        // x += 400;
+        // y += 100;
+    // }
+// }

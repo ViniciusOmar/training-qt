@@ -3,6 +3,7 @@
 #include <QComboBox>
 #include <QHBoxLayout>
 #include <QPainter>
+#include <QStandardItemModel>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->toolBar->addWidget(spacer);
     ui->toolBar->addWidget(hotels);
-    ui->centralwidget-
+    ui->hotelWidget->setVisible(true);
 }
 
 MainWindow::~MainWindow()
@@ -28,18 +29,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*void MainWindow::paintEvent(QPaintEvent *e)
-{
-    QPainter painter(this);
-    int numberOfFloors = m_selectedHotel->numberOfFloors();
-    int minHorizontalSize = 400;
-    int verticalSize = 100;
-    for(int i = 0; i < numberOfFloors; ++i)
-    {
-        int numberOfRoomsOnThisFloor = m_selectedHotel->numberOfRoomsOnFloor(i);
-        for(int j = 0; j < numberOfRoomsOnThisFloor; ++j)
-        {
+// void MainWindow::paintEvent(QPaintEvent *e)
+// {
+    // QPainter painter(this);
+    // int numberOfFloors = m_selectedHotel->numberOfFloors();
+    // int minHorizontalSize = 400;
+    // int verticalSize = 100;
+    // for(int i = 0; i < numberOfFloors; ++i)
+    // {
+        // int numberOfRoomsOnThisFloor = m_selectedHotel->numberOfRoomsOnFloor(i);
+        // for(int j = 0; j < numberOfRoomsOnThisFloor; ++j)
+        // {
 
-        }
-    }
-}*/
+        // }
+    // }
+// }

@@ -36,7 +36,7 @@ private:
     double income;
 
 protected:
-    void paintEvent(QPaintEvent *e);
+    // void paintEvent(QPaintEvent *e);
 };
 
 Q_DECLARE_METATYPE(Hotel*)

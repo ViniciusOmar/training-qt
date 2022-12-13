@@ -68,7 +68,7 @@ private:
     Class m_class;
 
 protected:
-    void paintEvent(QPaintEvent *event);
+    // void paintEvent(QPaintEvent *event);
 };
 
 #endif // ROOM_H

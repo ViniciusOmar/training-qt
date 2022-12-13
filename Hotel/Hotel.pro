@@ -1,4 +1,5 @@
 QT       += core gui
+QT		 += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,12 +13,16 @@ SOURCES += \
     hotel.cpp \
     main.cpp \
     mainwindow.cpp \
-    room.cpp
+    room.cpp \
+    roomtableitem.cpp \
+    roomtablemodel.cpp
 
 HEADERS += \
     hotel.h \
     mainwindow.h \
-    room.h
+    room.h \
+    roomtableitem.h \
+    roomtablemodel.h
 
 FORMS += \
     hotel.ui \
