@@ -1,133 +1,89 @@
 #include "room.h"
-#include "ui_room.h"
 #include <QPolygon>
 #include <QPainter>
+#include <QVariant>
 
-Room::Room(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Room)
+Room::Room(QObject *parent) :
+    QObject{parent}
 {
-    ui->setupUi(this);
+    m_numberIdentifier = "";
+    m_numberOfOccupiers = 0;
+    m_allocated = false;
+    m_dayPrice = 0;
+    m_monthPrice = 0;
+    m_roomFloor = 0;
+
+    m_allocationType = Room::AllocationType::NONE;
+    m_type = Room::Type::NONE;
+    m_class = Room::Class::NONE;
 }
 
-Room::~Room()
+//Getters and Setters
+const QString &Room::numberIdentifier() const { return m_numberIdentifier; }
+void Room::setNumberIdentifier(const QString &newNumberIdentifier) { m_numberIdentifier = newNumberIdentifier; }
+
+const bool& Room::allocated() const { return m_allocated; }
+void Room::setAllocated(bool newAllocated) { m_allocated = newAllocated; }
+
+const Room::AllocationType& Room::allocationType() const { return m_allocationType; }
+void Room::setAllocationType(AllocationType newAllocationType) { m_allocationType = newAllocationType; }
+
+const int& Room::numberOfOccupiers() const { return m_numberOfOccupiers; }
+void Room::setNumberOfOccupiers(int newNumberOfOccupiers) { m_numberOfOccupiers = newNumberOfOccupiers; }
+
+const double& Room::dayPrice() const { return m_dayPrice; }
+void Room::setDayPrice(double newDayPrice) { m_dayPrice = newDayPrice; }
+
+const double& Room::monthPrice() const { return m_monthPrice; }
+void Room::setMonthPrice(double newMonthPrice) { m_monthPrice = newMonthPrice; }
+
+const Room::Type & Room::type() const { return m_type; }
+void Room::setType(Type newType) { m_type = newType; }
+
+const Room::Class & Room::getClass() const { return m_class; }
+void Room::setClass(Class newClass) { m_class = newClass; }
+
+const int& Room::id() const { return m_id; }
+void Room::setId(int newId) { m_id = newId; }
+
+const int& Room::floor() const { return m_roomFloor; }
+void Room::setFloor(int newFloor) { m_roomFloor = newFloor; }
+
+//Model Related
+QVariant Room::getData(int column) const
 {
-    delete ui;
+    switch(column)
+    {
+        case Room::NUMBERIDENTIFIER:
+            return numberIdentifier();
+        case Room::ALLOCATED:
+            return allocated();
+        case Room::FLOOR:
+            return floor();
+        case Room::NUMBEROFOCCUPIERS:
+            return numberOfOccupiers();
+        case Room::DAYPRICE:
+            return dayPrice();
+        case Room::MONTHPRICE:
+            return monthPrice();
+        case Room::TYPE:
+            return QVariant::fromValue(type());
+        case Room::CLASS:
+            return QVariant::fromValue(getClass());
+        default:
+            break;
+    }
+
+    return QVariant();
 }
 
-const QString &Room::numberIdentifier() const
+void Room::addRootChild(Room* newRootChild, int position)
 {
-    return m_numberIdentifier;
+    m_rootChildren.insert(position, newRootChild);
+    newRootChild->setParent(this);
 }
 
-void Room::setNumberIdentifier(const QString &newNumberIdentifier)
+QList<Room*> Room::getRootChildren() const
 {
-    m_numberIdentifier = newNumberIdentifier;
+    return m_rootChildren;
 }
-
-bool Room::allocated() const
-{
-    return m_allocated;
-}
-
-void Room::setAllocated(bool newAllocated)
-{
-    m_allocated = newAllocated;
-}
-
-Room::AllocationType Room::allocationType() const
-{
-    return m_allocationType;
-}
-
-void Room::setAllocationType(AllocationType newAllocationType)
-{
-    m_allocationType = newAllocationType;
-}
-
-int Room::numberOfOccupiers() const
-{
-    return m_numberOfOccupiers;
-}
-
-void Room::setNumberOfOccupiers(int newNumberOfOccupiers)
-{
-    m_numberOfOccupiers = newNumberOfOccupiers;
-}
-
-double Room::dayPrice() const
-{
-    return m_dayPrice;
-}
-
-void Room::setDayPrice(double newDayPrice)
-{
-    m_dayPrice = newDayPrice;
-}
-
-double Room::monthPrice() const
-{
-    return m_monthPrice;
-}
-
-void Room::setMonthPrice(double newMonthPrice)
-{
-    m_monthPrice = newMonthPrice;
-}
-
-Room::Type Room::type() const
-{
-    return m_type;
-}
-
-void Room::setType(Type newType)
-{
-    m_type = newType;
-}
-
-Room::Class Room::getClass() const
-{
-    return m_class;
-}
-
-void Room::setClass(Class newClass)
-{
-    m_class = newClass;
-}
-
-int Room::id() const
-{
-    return m_id;
-}
-
-void Room::setId(int newId)
-{
-    m_id = newId;
-}
-
-int Room::getFloor() const
-{
-    return floor;
-}
-
-void Room::setFloor(int newFloor)
-{
-    floor = newFloor;
-}
-
-// void Room::paintEvent(QPaintEvent *event)
-// {
-
-    // QPolygon roomDrawing;
-    // roomDrawing << QPoint(0, 0);
-    // roomDrawing << QPoint(40, 0);
-    // roomDrawing << QPoint(40, 60);
-    // roomDrawing << QPoint(0, 60);
-
-    // QPen pen;
-    // pen.setColor(Qt::blue);
-
-    // QPainter painter(this);
-    // painter.setPen(pen);
-    // painter.drawPolygon(roomDrawing);
-// }

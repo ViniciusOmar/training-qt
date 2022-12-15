@@ -2,23 +2,14 @@
 #define ROOMTABLEITEM_H
 
 #include <QVariant>
+#include <QAbstractTableModel>
 
 class RoomTableItem
 {
 public:
-    RoomTableItem(const QList<QVariant>&data, RoomTableItem *parent = nullptr);
+    RoomTableItem(const QList<QVariant>&data, QList<RoomTableItem*> *parent = nullptr);
 
-    bool setData(int column, const QVariant &value);
-    QList<QVariant> getData() const;
-
-    int columnCount() const;
-    int insertColumn(int position, int columns);
-
-    int row() const;
-
-private:
-    QList<QVariant> m_roomData;
-    RoomTableItem *m_parent;
+    private:
 };
 
 #endif // ROOMTABLEITEM_H

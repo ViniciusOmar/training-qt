@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "hotel.h"
+#include "roomtablemodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -16,11 +17,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void on_actionInsertRow_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     QList<Hotel*> m_hotels;
     Hotel *m_selectedHotel;
+    //RoomTableModel *m_modelFromSelectedHotel;
+    RoomTableModel *m_roomTableModel;
+
 
 protected:
     // void paintEvent(QPaintEvent *e);

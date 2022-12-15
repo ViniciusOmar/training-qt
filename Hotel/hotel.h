@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDebug>
 #include "room.h"
+#include "roomtablemodel.h"
 
 namespace Ui {
 class Hotel;
@@ -23,6 +24,8 @@ public:
     int numberOfFloors() const;
     int numberOfRoomsOnFloor(int floor) const;
 
+    RoomTableModel *getRoomTableModel() const;
+
 private:
     Ui::Hotel *ui;
 
@@ -31,7 +34,6 @@ private:
 
     int m_numberOfFloors;
     QList<Room*> m_rooms;
-
 
     double income;
 

@@ -1,58 +1,67 @@
 #ifndef ROOM_H
 #define ROOM_H
 
-#include <QWidget>
+#include <QObject>
 
-namespace Ui {
-class Room;
-}
-
-class Room : public QWidget
+class Room : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit Room(QWidget *parent = nullptr);
-    ~Room();
+    explicit Room(QObject *parent = nullptr);
 
-    enum Type { SINGLE, DOUBLE, TRIPLE, QUAD };
-    enum Class { STANDARD, MASTER, DELUXE };
-    enum AllocationType { NONE, DAY, MONTH };
+    enum class Type { NONE, SINGLE, DOUBLE, TRIPLE, QUAD };
+    enum class Class { NONE, STANDARD, MASTER, DELUXE };
+    enum class AllocationType { NONE, DAY, MONTH };
 
     const QString &numberIdentifier() const;
     void setNumberIdentifier(const QString &newNumberIdentifier);
 
-    bool allocated() const;
+    const bool &allocated() const;
     void setAllocated(bool newAllocated);
 
-    AllocationType allocationType() const;
+    const AllocationType &allocationType() const;
     void setAllocationType(AllocationType newAllocationType);
 
-    int numberOfOccupiers() const;
+    const int &numberOfOccupiers() const;
     void setNumberOfOccupiers(int newNumberOfOccupiers);
 
-    double dayPrice() const;
+    const double &dayPrice() const;
     void setDayPrice(double newDayPrice);
 
-    double monthPrice() const;
+    const double &monthPrice() const;
     void setMonthPrice(double newMonthPrice);
 
-    Type type() const;
+    const Type &type() const;
     void setType(Type newType);
 
-    Class getClass() const;
+    const Class &getClass() const;
     void setClass(Class newClass);
 
-    int id() const;
+    const int &id() const;
     void setId(int newId);
 
-    int getFloor() const;
+    const int &floor() const;
     void setFloor(int newFloor);
 
+    //Model related
+    enum Columns
+    {
+        NUMBERIDENTIFIER,
+        FLOOR,
+        ALLOCATED,
+        NUMBEROFOCCUPIERS,
+        DAYPRICE,
+        MONTHPRICE,
+        TYPE,
+        CLASS,
+        NUMBEROFCOLUMNS
+    };
 
+    QVariant getData(int column) const;
+    void addRootChild(Room* rootChild, int rowPosition);
+    QList<Room*> getRootChildren() const;
 private:
-    Ui::Room *ui;
-
     int m_id;
     QString m_numberIdentifier;
 
@@ -62,13 +71,15 @@ private:
 
     double m_dayPrice;
     double m_monthPrice;
-    int floor;
+    int m_roomFloor;
 
     Type m_type;
     Class m_class;
 
-protected:
-    // void paintEvent(QPaintEvent *event);
+    //Model Related
+    QList<Room*> m_rootChildren;
 };
 
+Q_DECLARE_METATYPE(Room::Type);
+Q_DECLARE_METATYPE(Room::Class);
 #endif // ROOM_H

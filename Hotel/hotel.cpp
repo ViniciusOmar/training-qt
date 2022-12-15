@@ -12,7 +12,8 @@ Hotel::Hotel(QWidget *parent) :
     m_name = "HoHoHotel";
     m_numberOfFloors = 1;
 
-    Room *room1 = new Room(this);
+    //m_roomTableModel = new RoomTableModel(this);
+    Room *room1 = new Room();
     room1->setId(1);
     room1->setNumberIdentifier("100");
     room1->setAllocated(true);
@@ -23,7 +24,7 @@ Hotel::Hotel(QWidget *parent) :
     room1->setClass(Room::Class::STANDARD);
     room1->setFloor(1);
 
-    Room *room2 = new Room(this);
+    Room *room2 = new Room();
     room2->setId(2);
     room2->setNumberIdentifier("101");
     room2->setAllocated(false);
@@ -58,7 +59,7 @@ int Hotel::numberOfRoomsOnFloor(int floor) const
     int roomsOnFloor = 0;
     for(Room* room : m_rooms)
     {
-        if(room->getFloor() == floor)
+        if(room->floor() == floor)
         {
             ++roomsOnFloor;
         }
@@ -66,6 +67,11 @@ int Hotel::numberOfRoomsOnFloor(int floor) const
 
     return roomsOnFloor;
 }
+
+// RoomTableModel *Hotel::getRoomTableModel() const
+// {
+    // return m_roomTableModel;
+// }
 
 // void Hotel::paintEvent(QPaintEvent *e)
 // {
