@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     m_roomTableModel = new RoomTableModel(this);
 
     connect(ui->actionInsertRow, &QAction::triggered, this, &MainWindow::on_actionInsertRow_triggered);
-    connect(ui->actionDeleteRow, &QAction::triggered, this, &MainWindow::on_actionDeleteRow_triggered);
 
     ui->toolBar->addWidget(spacer);
     ui->toolBar->addWidget(hotels);
@@ -39,21 +38,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// void MainWindow::paintEvent(QPaintEvent *e)
+// {
+    // QPainter painter(this);
+    // int numberOfFloors = m_selectedHotel->numberOfFloors();
+    // int minHorizontalSize = 400;
+    // int verticalSize = 100;
+    // for(int i = 0; i < numberOfFloors; ++i)
+    // {
+        // int numberOfRoomsOnThisFloor = m_selectedHotel->numberOfRoomsOnFloor(i);
+        // for(int j = 0; j < numberOfRoomsOnThisFloor; ++j)
+        // {
+
+        // }
+    // }
+// }
+
 void MainWindow::on_actionInsertRow_triggered()
 {
-    QItemSelectionModel *rowSelection = ui->tableView->selectionModel();
-    int row = 0;
-
-    if(rowSelection)
-    {
-        row = rowSelection->currentIndex().row();
-    }
-
-    m_roomTableModel->insertRow(row, QModelIndex());
-}
-
-void MainWindow::on_actionDeleteRow_triggered()
-{
-    QModelIndex rowIndex = ui->tableView->selectionModel()->currentIndex();
-    m_roomTableModel->removeRow(rowIndex.row(), QModelIndex());
+    m_roomTableModel->insertRow(0, QModelIndex());
 }

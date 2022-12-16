@@ -60,10 +60,7 @@ public:
 
     QVariant getData(int column) const;
     void addRootChild(Room* rootChild, int rowPosition);
-    void removeRootChildAt(int row);
     QList<Room*> getRootChildren() const;
-    Room *getRootChildAt(int row) const;
-
 private:
     int m_id;
     QString m_numberIdentifier;

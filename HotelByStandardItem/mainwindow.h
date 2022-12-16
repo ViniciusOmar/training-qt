@@ -18,7 +18,6 @@ public:
     ~MainWindow();
 
     void on_actionInsertRow_triggered();
-    void on_actionDeleteRow_triggered();
 
 private:
     Ui::MainWindow *ui;

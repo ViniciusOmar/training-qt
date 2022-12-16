@@ -82,17 +82,8 @@ void Room::addRootChild(Room* newRootChild, int position)
     m_rootChildren.insert(position, newRootChild);
     newRootChild->setParent(this);
 }
-void Room::removeRootChildAt(int row)
-{
-    m_rootChildren.removeAt(row);
-}
-
 
 QList<Room*> Room::getRootChildren() const
 {
     return m_rootChildren;
-}
-Room* Room::getRootChildAt(int row) const
-{
-    return m_rootChildren.at(row);
 }

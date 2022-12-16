@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/Hotels.json</file>
+    </qresource>
+</RCC>

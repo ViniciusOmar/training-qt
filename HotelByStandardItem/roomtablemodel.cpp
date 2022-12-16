@@ -3,25 +3,32 @@
 #include <QDebug>
 
 RoomTableModel::RoomTableModel(QObject *parent)
-    : QAbstractTableModel(parent),
+    : QAbstractItemModel(parent),
       m_numberOfRows(0),
       m_numberOfColumns(Room::NUMBEROFCOLUMNS),
       m_roomRoot(new Room(this))
 {
 }
 
-QModelIndex RoomTableModel::index(int row, int column, const QModelIndex &parent) const
+QModelIndex RoomTableModel::index(int row, int column,
+                                 const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    Room *item = m_roomRoot->getRootChildAt(row);
+    Room *item = m_roomRoot->getRootChildren().at(row);
     return createIndex(row, column, item);
+}
+
+QModelIndex RoomTableModel::parent(const QModelIndex &index) const
+{
+    qDebug() << "Index[" << index.row() << "][" << index.column() << "]";
+    return QModelIndex();
 }
 
 
 int RoomTableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_roomRoot->children().count();
+    return m_numberOfRows;
 }
 
 int RoomTableModel::columnCount(const QModelIndex &parent) const
@@ -49,7 +56,6 @@ QVariant RoomTableModel::data(const QModelIndex &index, int role) const
 
     return QVariant();
 }
-
 
 bool RoomTableModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
@@ -155,14 +161,14 @@ QVariant RoomTableModel::headerData(int section, Qt::Orientation orientation, in
     return QVariant();
 }
 
-
 bool RoomTableModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     beginInsertRows(parent, row, row + count - 1);
     for(int i = 0; i < count; ++i)
     {
-        Room *newRow = new Room(m_roomRoot);
+        auto newRow = new Room(m_roomRoot);
         m_roomRoot->addRootChild(newRow, row + i);
+        ++m_numberOfRows;
     }
     endInsertRows();
     return true;
@@ -173,7 +179,7 @@ bool RoomTableModel::removeRows(int row, int count, const QModelIndex &parent)
     beginRemoveRows(parent, row, row + count - 1);
     for(int i = 0; i < count; ++i)
     {
-        m_roomRoot->removeRootChildAt(row);
+        delete m_roomRoot->getRootChildren().takeAt(row + i);
     }
     endRemoveRows();
     return true;
