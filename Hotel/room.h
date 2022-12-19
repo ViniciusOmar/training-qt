@@ -2,6 +2,8 @@
 #define ROOM_H
 
 #include <QObject>
+#include <QString>
+#include <QMap>
 
 class Room : public QObject
 {
@@ -10,7 +12,7 @@ class Room : public QObject
 public:
     explicit Room(QObject *parent = nullptr);
 
-    enum class Type { NONE, SINGLE, DOUBLE, TRIPLE, QUAD };
+    enum class Type { NONE, SINGLE, DOUBLE, TRIPLE, QUAD }; Q_ENUM(Type);
     enum class Class { NONE, STANDARD, MASTER, DELUXE };
     enum class AllocationType { NONE, DAY, MONTH };
 

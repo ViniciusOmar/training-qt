@@ -5,6 +5,8 @@
 #include <QPainter>
 #include <QStandardItemModel>
 #include <QTableView>
+#include <QMessageBox>
+#include "comboboxdelegate.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->hotelWidget->setVisible(true);
     ui->tableView->setModel(m_roomTableModel);
+    ui->tableView->setItemDelegateForColumn(6, new ComboBoxDelegate(this));
 
     setCentralWidget(ui->hotelWidget);
 }
@@ -42,11 +45,11 @@ MainWindow::~MainWindow()
 void MainWindow::on_actionInsertRow_triggered()
 {
     QItemSelectionModel *rowSelection = ui->tableView->selectionModel();
-    int row = 0;
+    int row = m_roomTableModel->rowCount();
 
-    if(rowSelection)
+    if(rowSelection->hasSelection())
     {
-        row = rowSelection->currentIndex().row();
+        row = rowSelection->currentIndex().row() + 1;
     }
 
     m_roomTableModel->insertRow(row, QModelIndex());
@@ -54,6 +57,14 @@ void MainWindow::on_actionInsertRow_triggered()
 
 void MainWindow::on_actionDeleteRow_triggered()
 {
-    QModelIndex rowIndex = ui->tableView->selectionModel()->currentIndex();
+    QItemSelectionModel *rowSelection = ui->tableView->selectionModel();
+
+    if(!rowSelection->hasSelection())
+    {
+        QMessageBox::warning(this, tr("Warning"), tr("It's necessary to select a row for deletion!"));
+        return;
+    }
+
+    QModelIndex rowIndex = rowSelection->currentIndex();
     m_roomTableModel->removeRow(rowIndex.row(), QModelIndex());
 }

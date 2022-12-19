@@ -21,7 +21,7 @@ QModelIndex RoomTableModel::index(int row, int column, const QModelIndex &parent
 int RoomTableModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
-    return m_roomRoot->children().count();
+    return m_roomRoot->getRootChildren().count();
 }
 
 int RoomTableModel::columnCount(const QModelIndex &parent) const
@@ -38,11 +38,13 @@ QVariant RoomTableModel::data(const QModelIndex &index, int role) const
     }
 
     auto item = static_cast<Room*>(index.internalPointer());
+    QVariant received;
     switch(role)
     {
         case Qt::DisplayRole: case Qt::EditRole:
-            return item->getData(index.column());
-            break;
+            received = item->getData(index.column());
+            qDebug() << received;
+            return received;
         default:
             break;
     }

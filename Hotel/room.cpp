@@ -2,6 +2,7 @@
 #include <QPolygon>
 #include <QPainter>
 #include <QVariant>
+#include <QMetaEnum>
 
 Room::Room(QObject *parent) :
     QObject{parent}
@@ -67,7 +68,7 @@ QVariant Room::getData(int column) const
         case Room::MONTHPRICE:
             return monthPrice();
         case Room::TYPE:
-            return QVariant::fromValue(type());
+            return QMetaEnum::fromType<Room::Type>().valueToKey(static_cast<int>(type()));
         case Room::CLASS:
             return QVariant::fromValue(getClass());
         default:
