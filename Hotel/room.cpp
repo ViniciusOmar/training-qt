@@ -40,9 +40,44 @@ void Room::setMonthPrice(double newMonthPrice) { m_monthPrice = newMonthPrice; }
 
 const Room::Type & Room::type() const { return m_type; }
 void Room::setType(Type newType) { m_type = newType; }
+const QString Room::enumTypeToString(Type typeEnum) const
+{
+    switch(typeEnum)
+    {
+        case Type::NONE:
+            return "";
+        case Type::SINGLE:
+            return "Single";
+        case Type::DOUBLE:
+            return "Double";
+        case Type::TRIPLE:
+            return "Triple";
+        case Type::QUAD:
+            return "Quad";
+        default:
+            return "";
+    }
+}
 
 const Room::Class & Room::getClass() const { return m_class; }
 void Room::setClass(Class newClass) { m_class = newClass; }
+const QString Room::enumClassToString(Class classEnum) const
+{
+    switch(classEnum)
+    {
+        case Class::NONE:
+            return "";
+        case Class::STANDARD:
+            return "Standard";
+        case Class::MASTER:
+            return "Master";
+        case Class::DELUXE:
+            return "Deluxe";
+        default:
+            return "";
+    }
+}
+
 
 const int& Room::id() const { return m_id; }
 void Room::setId(int newId) { m_id = newId; }
@@ -68,9 +103,12 @@ QVariant Room::getData(int column) const
         case Room::MONTHPRICE:
             return monthPrice();
         case Room::TYPE:
-            return QMetaEnum::fromType<Room::Type>().valueToKey(static_cast<int>(type()));
+            // return QMetaEnum::fromType<Room::Type>().valueToKey(static_cast<int>(type()));
+            // return QVariant::fromValue(type());
+            return enumTypeToString(type());
         case Room::CLASS:
-            return QVariant::fromValue(getClass());
+            // return QVariant::fromValue(getClass());
+            return enumClassToString(getClass());
         default:
             break;
     }
@@ -87,7 +125,6 @@ void Room::removeRootChildAt(int row)
 {
     m_rootChildren.removeAt(row);
 }
-
 
 QList<Room*> Room::getRootChildren() const
 {

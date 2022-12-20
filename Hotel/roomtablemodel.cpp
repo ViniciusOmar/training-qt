@@ -38,13 +38,10 @@ QVariant RoomTableModel::data(const QModelIndex &index, int role) const
     }
 
     auto item = static_cast<Room*>(index.internalPointer());
-    QVariant received;
     switch(role)
     {
         case Qt::DisplayRole: case Qt::EditRole:
-            received = item->getData(index.column());
-            qDebug() << received;
-            return received;
+            return item->getData(index.column());
         default:
             break;
     }

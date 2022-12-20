@@ -6,7 +6,8 @@
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QMessageBox>
-#include "comboboxdelegate.h"
+#include "roomtypedelegate.h"
+#include "roomclassdelegate.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -32,7 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->hotelWidget->setVisible(true);
     ui->tableView->setModel(m_roomTableModel);
-    ui->tableView->setItemDelegateForColumn(6, new ComboBoxDelegate(this));
+    ui->tableView->setItemDelegateForColumn(6, new RoomTypeDelegate(this));
+    ui->tableView->setItemDelegateForColumn(7, new RoomClassDelegate(this));
 
     setCentralWidget(ui->hotelWidget);
 }

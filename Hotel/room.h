@@ -13,8 +13,8 @@ public:
     explicit Room(QObject *parent = nullptr);
 
     enum class Type { NONE, SINGLE, DOUBLE, TRIPLE, QUAD }; Q_ENUM(Type);
-    enum class Class { NONE, STANDARD, MASTER, DELUXE };
-    enum class AllocationType { NONE, DAY, MONTH };
+    enum class Class { NONE, STANDARD, MASTER, DELUXE }; Q_ENUM(Class);
+    enum class AllocationType { NONE, DAY, MONTH }; Q_ENUM(AllocationType);
 
     const QString &numberIdentifier() const;
     void setNumberIdentifier(const QString &newNumberIdentifier);
@@ -36,9 +36,11 @@ public:
 
     const Type &type() const;
     void setType(Type newType);
+    const QString enumTypeToString(Type) const;
 
     const Class &getClass() const;
     void setClass(Class newClass);
+    const QString enumClassToString(Class classEnum) const;
 
     const int &id() const;
     void setId(int newId);
@@ -85,6 +87,4 @@ private:
     QList<Room*> m_rootChildren;
 };
 
-Q_DECLARE_METATYPE(Room::Type);
-Q_DECLARE_METATYPE(Room::Class);
 #endif // ROOM_H
