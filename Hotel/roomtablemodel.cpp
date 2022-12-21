@@ -1,6 +1,7 @@
 #include "roomtablemodel.h"
 #include <QModelIndex>
 #include <QDebug>
+#include <QBrush>
 
 RoomTableModel::RoomTableModel(QObject *parent)
     : QAbstractTableModel(parent),
@@ -40,8 +41,18 @@ QVariant RoomTableModel::data(const QModelIndex &index, int role) const
     auto item = static_cast<Room*>(index.internalPointer());
     switch(role)
     {
-        case Qt::DisplayRole: case Qt::EditRole:
+        case Qt::DisplayRole:
+        case Qt::EditRole:
             return item->getData(index.column());
+        case Qt::BackgroundRole:
+            if(data( this->index( index.row(), 2, QModelIndex()), Qt::DisplayRole).toBool())
+            {
+                return QBrush(Qt::green);
+            }
+            else
+            {
+                return QBrush(Qt::red);
+            }
         default:
             break;
     }
@@ -107,6 +118,11 @@ Qt::ItemFlags RoomTableModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
+
+    if(index.column() == Room::Columns::ALLOCATED)
+    {
+        return QAbstractItemModel::flags(index);
+    }
 
     return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
 }

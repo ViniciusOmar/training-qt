@@ -10,6 +10,8 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    booleandelegate.cpp \
+    booleanwidget.cpp \
     hotel.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,6 +21,8 @@ SOURCES += \
     roomtypedelegate.cpp
 
 HEADERS += \
+    booleandelegate.h \
+    booleanwidget.h \
     hotel.h \
     mainwindow.h \
     room.h \

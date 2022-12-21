@@ -1,24 +1,26 @@
-#ifndef ROOMCLASSDELEGATE_H
-#define ROOMCLASSDELEGATE_H
+#ifndef BOOLEANDELEGATE_H
+#define BOOLEANDELEGATE_H
 
 #include <QStyledItemDelegate>
-#include "room.h"
+#include "booleanwidget.h"
 
-class RoomClassDelegate : public QStyledItemDelegate
+
+class BooleanDelegate : public QStyledItemDelegate
 {
     Q_OBJECT
-public:
-    explicit RoomClassDelegate(QObject *parent = nullptr);
 
-    // QAbstractItemDelegate interface
+private:
+    BooleanWidget *m_editorBoolean;
+
+public:
+    explicit BooleanDelegate(QObject *parent = nullptr);
+
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
     void setEditorData(QWidget *editor, const QModelIndex &index) const override;
     void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const override;
 
-    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
     void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const override;
-private:
-    QMap<Room::Class, QString> m_roomClass;
+    bool editorEvent(QEvent *event, QAbstractItemModel *model, const QStyleOptionViewItem &option, const QModelIndex &index) override;
 };
 
-#endif // ROOMCLASSDELEGATE_H
+#endif // BOOLEANDELEGATE_H

@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include "roomtypedelegate.h"
 #include "roomclassdelegate.h"
+#include "booleandelegate.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,6 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
     spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 
     m_roomTableModel = new RoomTableModel(this);
+    m_filterProxyModel = new QSortFilterProxyModel(this);
+    m_filterProxyModel->setSourceModel(m_roomTableModel);
+
 
     connect(ui->actionInsertRow, &QAction::triggered, this, &MainWindow::on_actionInsertRow_triggered);
     connect(ui->actionDeleteRow, &QAction::triggered, this, &MainWindow::on_actionDeleteRow_triggered);
@@ -32,7 +36,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->toolBar->addWidget(hotels);
 
     ui->hotelWidget->setVisible(true);
-    ui->tableView->setModel(m_roomTableModel);
+    ui->tableView->setModel(m_filterProxyModel);
+    ui->tableView->setItemDelegateForColumn(Room::Columns::ALLOCATED, new BooleanDelegate(this));
     ui->tableView->setItemDelegateForColumn(6, new RoomTypeDelegate(this));
     ui->tableView->setItemDelegateForColumn(7, new RoomClassDelegate(this));
 

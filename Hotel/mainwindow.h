@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "hotel.h"
 #include "roomtablemodel.h"
+#include <QSortFilterProxyModel>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +28,8 @@ private:
     Hotel *m_selectedHotel;
     //RoomTableModel *m_modelFromSelectedHotel;
     RoomTableModel *m_roomTableModel;
+    QSortFilterProxyModel *m_filterProxyModel;
+
 
 
 protected:

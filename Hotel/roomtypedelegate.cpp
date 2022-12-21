@@ -61,11 +61,11 @@ bool RoomTypeDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, con
         QMouseEvent* mouseEvent = static_cast<QMouseEvent*>(event);
         if(mouseEvent->button() == Qt::LeftButton)
         {
-            QAbstractItemView* treeView = qobject_cast<QAbstractItemView*>( const_cast<QWidget*>(option.widget) );
-            if(treeView != nullptr)
+            QAbstractItemView* currentView = qobject_cast<QAbstractItemView*>( const_cast<QWidget*>(option.widget) );
+            if(currentView != nullptr)
             {
-                treeView->setCurrentIndex(index);
-                treeView->edit(index);
+                currentView->setCurrentIndex(index);
+                currentView->edit(index);
             }
             return true;
         }

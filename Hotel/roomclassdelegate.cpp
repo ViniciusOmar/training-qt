@@ -4,6 +4,7 @@
 #include <QEvent>
 #include <QMouseEvent>
 #include <QAbstractItemView>
+#include <QStyleOptionComboBox>
 
 RoomClassDelegate::RoomClassDelegate(QObject *parent)
     : QStyledItemDelegate{parent}
@@ -60,6 +61,8 @@ bool RoomClassDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
                 currentView->setCurrentIndex(index);
                 currentView->edit(index);
             }
+
+            return true;
         }
 
     }
@@ -67,8 +70,16 @@ bool RoomClassDelegate::editorEvent(QEvent *event, QAbstractItemModel *model, co
     return QAbstractItemDelegate::editorEvent(event, model, option, index);
 }
 
-// void RoomClassDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
-// {
-// }
+void RoomClassDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    Q_UNUSED(index);
+    QStyleOptionComboBox comboBoxVisual;
+    comboBoxVisual.rect = option.rect;
+    comboBoxVisual.state = option.state;
+
+    comboBoxVisual.currentText = index.data().toString();
+    option.widget->style()->drawComplexControl(QStyle::CC_ComboBox, &comboBoxVisual, painter, 0);
+    option.widget->style()->drawControl(QStyle::CE_ComboBoxLabel, &comboBoxVisual, painter, 0);
+}
 
 // inline
